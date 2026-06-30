@@ -1,0 +1,14 @@
+k<!--
+  Regla compuesta de exfiltracion de datos:
+  1. Correlaciona multiples autenticaciones SSH exitosas (5715) fuera del horario laboral
+  2. Nivel de severidad 14 (critico)
+  3. Horario nocturno 22:00 - 06:00
+-->
+<group name="local,exfiltration,">
+  <rule id="100002" level="14" frequency="5" timeframe="300">
+    <if_matched_sid>5715</if_matched_sid>
+    <field name="hour">22-06</field>
+    <description>ALERTA CRITICA: Actividad anomala - multiples accesos SSH exitosos fuera del horario laboral</description>
+    <group>data_exfiltration,critical</group>
+  </rule>
+</group>

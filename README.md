@@ -104,7 +104,7 @@ pip3 list | grep -E "pandas|matplotlib|seaborn|scikit-learn|joblib|notebook"
 | Laboratorio | Estado |
 |-------------|--------|
 | Lab 1 - Análisis Forense de Logs con Python | ✅ Completado |
-| Lab 2 - Reglas de Correlación en Wazuh | ⏳ Pendiente |
+| Lab 2 - Reglas de Correlación en Wazuh | ✅ Completado |
 | Lab 3 - Modelo ML de Detección de Anomalías | ⏳ Pendiente |
 | Lab 4 - Dashboard de Monitoreo | ⏳ Pendiente |
 
@@ -156,7 +156,7 @@ python3 lab1/visualizar.py
 
 ---
 
-### Laboratorio 2: Reglas de Correlación en Wazuh (4 pts)
+### Laboratorio 2: Reglas de Correlación en Wazuh (4 pts) ✅
 
 **Ubicación:** VM1 (wazuh-vm) - `lab2/`
 
@@ -173,17 +173,23 @@ sudo systemctl restart wazuh-manager
 
 **Prueba:**
 ```bash
-# Copiar script de simulación a VM1
+# Ejecutar simulación
 bash lab2/simular_bruteforce.sh
 
 # Verificar alertas
-sudo tail -f /var/ossec/logs/alerts/alerts.log
+sudo grep "100001" /var/ossec/logs/alerts/alerts.log
 ```
 
-**Evidencias requeridas:**
-- SCR-2.1_wazuh_activo.png - `systemctl status wazuh-manager` activo
-- SCR-2.2_reglas_validadas.png - Validación XML sin errores
-- SCR-2.3_alerta_disparada.png - Alerta de brute-force en alerts.log
+#### Evidencias
+
+**SCR-2.1** - Servicio Wazuh Manager activo:
+![SCR-2.1](lab2/evidencias/SCR-2.1_wazuh_activo.png)
+
+**SCR-2.2** - Validación de reglas sin errores:
+![SCR-2.2](lab2/evidencias/SCR-2.2_reglas_validadas.png)
+
+**SCR-2.3** - Alerta de fuerza bruta SSH disparada (Rule ID 100001):
+![SCR-2.3](lab2/evidencias/SCR-2.3_alerta_disparada.png)
 
 ---
 
@@ -304,9 +310,9 @@ examen-practico-quilla-lopez/
 | SCR-1.1b | ✅ `lab1/evidencias/SCR-1.1b_ssh_json.png` | Contenido de `reporte_ssh.json` (cat o editor) |
 | SCR-1.2a | ✅ `lab1/evidencias/SCR-1.2a_web_ejecucion.png` | Terminal con detecciones de escaneo y SQLi |
 | SCR-1.2b | ✅ `lab1/evidencias/SCR-1.2b_web_json.png` | Contenido de `reporte_web.json` |
-| SCR-2.1 | `lab2/evidencias/SCR-2.1_wazuh_activo.png` | `systemctl status wazuh-manager` en estado active |
-| SCR-2.2 | `lab2/evidencias/SCR-2.2_reglas_validadas.png` | Validación XML sin errores |
-| SCR-2.3 | `lab2/evidencias/SCR-2.3_alerta_disparada.png` | Alerta de brute-force en alerts.log |
+| SCR-2.1 | ✅ `lab2/evidencias/SCR-2.1_wazuh_activo.png` | `systemctl status wazuh-manager` en estado active |
+| SCR-2.2 | ✅ `lab2/evidencias/SCR-2.2_reglas_validadas.png` | Validación XML sin errores |
+| SCR-2.3 | ✅ `lab2/evidencias/SCR-2.3_alerta_disparada.png` | Alerta de brute-force en alerts.log |
 | SCR-3.1 | `lab3/evidencias/SCR-3.1_eda.png` | Notebook con EDA e histogramas |
 | SCR-3.2 | `lab3/evidencias/SCR-3.2_metricas.png` | Métricas y matriz de confusión |
 | SCR-3.3 | `lab3/evidencias/SCR-3.3_umbral_f1.png` | Curva umbral vs F1 y Top 10 anomalías |
