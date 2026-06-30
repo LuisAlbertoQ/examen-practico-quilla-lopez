@@ -1,0 +1,37 @@
+<group name="local,exfiltration,">
+  <!--
+    REGLA COMPUESTA DE EXFILTRACION DE DATOS
+    Logica:
+    1. La regla 100010 detecta un login SSH exitoso fuera del horario laboral (22:00-06:00)
+       y asigna nivel 8 (sospechoso).
+    2. Una transferencia saliente de gran tamano registrada en el log del firewall/proxy
+       se captura en la regla 100020 (nivel 6).
+    3. La regla 100030 correlaciona ambos eventos: si hay login fuera de horas + transferencia
+       masiva >= 500MB, se dispara alerta critica nivel 14.
+  -->
+
+  <!-- Regla 1: Login SSH exitoso fuera del horario laboral -->
+  <rule id="100010" level="8">
+    <if_sid>5715</if_sid>
+    <field name="hour" type="osmatch">^(22|23|00|01|02|03|04|05)$</field>
+    <description>Login SSH exitoso fuera del horario laboral (22:00-06:00) desde $(srcip)</description>
+    <group>authentication_success,suspicious_hours,</group>
+  </rule>
+
+  <!-- Regla 2: Transferencia de datos saliente de gran tamano -->
+  <rule id="100020" level="6">
+    <if_sid>86701</if_sid>
+    <field name="bytes_out" type="osmatch">^[5-9][0-9]{2,}|[1-9][0-9]{3,}</field>
+    <description>Transferencia saliente masiva detectada: $(bytes_out) MB desde $(srcip)</description>
+    <group>exfiltration,data_transfer,</group>
+  </rule>
+
+  <!-- Regla 3: Correlacion - Exfiltracion fuera de horario laboral (NIVEL CRITICO) -->
+  <rule id="100030" level="14" frequency="2" timeframe="3600">
+    <if_matched_sid>100010,100020</if_matched_sid>
+    <same_source_ip />
+    <description>POSIBLE EXFILTRACION DE DATOS: Login fuera de horario seguido de transferencia masiva >500MB desde $(srcip)</description>
+    <group>exfiltration,critical,data_breach,</group>
+  </rule>
+
+</group>
