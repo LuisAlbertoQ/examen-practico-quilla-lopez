@@ -1,0 +1,337 @@
+{
+    "fecha_analisis": "2026-06-30 15:22:27",
+    "escaneo_directorios": [
+        {
+            "ip": "45.33.32.156",
+            "rutas_distintas": 18
+        }
+    ],
+    "errores_http_por_ip": [
+        {
+            "ip": "45.33.32.156",
+            "4xx": 44,
+            "5xx": 3,
+            "total": 47
+        },
+        {
+            "ip": "193.32.162.55",
+            "4xx": 4,
+            "5xx": 14,
+            "total": 18
+        },
+        {
+            "ip": "89.210.135.99",
+            "4xx": 10,
+            "5xx": 8,
+            "total": 18
+        },
+        {
+            "ip": "122.153.40.102",
+            "4xx": 7,
+            "5xx": 10,
+            "total": 17
+        },
+        {
+            "ip": "115.88.85.249",
+            "4xx": 5,
+            "5xx": 8,
+            "total": 13
+        },
+        {
+            "ip": "185.220.101.45",
+            "4xx": 6,
+            "5xx": 7,
+            "total": 13
+        },
+        {
+            "ip": "147.242.19.45",
+            "4xx": 7,
+            "5xx": 5,
+            "total": 12
+        },
+        {
+            "ip": "91.240.118.172",
+            "4xx": 6,
+            "5xx": 6,
+            "total": 12
+        },
+        {
+            "ip": "183.17.75.31",
+            "4xx": 4,
+            "5xx": 8,
+            "total": 12
+        },
+        {
+            "ip": "211.75.132.82",
+            "4xx": 6,
+            "5xx": 6,
+            "total": 12
+        },
+        {
+            "ip": "198.98.54.31",
+            "4xx": 7,
+            "5xx": 4,
+            "total": 11
+        },
+        {
+            "ip": "23.129.64.214",
+            "4xx": 3,
+            "5xx": 7,
+            "total": 10
+        },
+        {
+            "ip": "37.205.19.102",
+            "4xx": 5,
+            "5xx": 5,
+            "total": 10
+        },
+        {
+            "ip": "48.228.22.68",
+            "4xx": 4,
+            "5xx": 5,
+            "total": 9
+        },
+        {
+            "ip": "4.214.57.107",
+            "4xx": 7,
+            "5xx": 2,
+            "total": 9
+        },
+        {
+            "ip": "76.245.102.25",
+            "4xx": 3,
+            "5xx": 6,
+            "total": 9
+        },
+        {
+            "ip": "78.159.143.216",
+            "4xx": 3,
+            "5xx": 6,
+            "total": 9
+        },
+        {
+            "ip": "21.242.59.79",
+            "4xx": 5,
+            "5xx": 4,
+            "total": 9
+        },
+        {
+            "ip": "68.115.137.145",
+            "4xx": 4,
+            "5xx": 5,
+            "total": 9
+        },
+        {
+            "ip": "85.121.25.191",
+            "4xx": 6,
+            "5xx": 3,
+            "total": 9
+        },
+        {
+            "ip": "69.190.10.87",
+            "4xx": 4,
+            "5xx": 4,
+            "total": 8
+        },
+        {
+            "ip": "106.116.31.216",
+            "4xx": 4,
+            "5xx": 4,
+            "total": 8
+        },
+        {
+            "ip": "179.50.116.35",
+            "4xx": 5,
+            "5xx": 3,
+            "total": 8
+        },
+        {
+            "ip": "207.34.44.100",
+            "4xx": 4,
+            "5xx": 4,
+            "total": 8
+        },
+        {
+            "ip": "134.214.243.147",
+            "4xx": 1,
+            "5xx": 6,
+            "total": 7
+        },
+        {
+            "ip": "100.94.189.227",
+            "4xx": 5,
+            "5xx": 1,
+            "total": 6
+        },
+        {
+            "ip": "121.250.135.24",
+            "4xx": 3,
+            "5xx": 3,
+            "total": 6
+        },
+        {
+            "ip": "142.166.141.134",
+            "4xx": 3,
+            "5xx": 3,
+            "total": 6
+        },
+        {
+            "ip": "50.64.21.109",
+            "4xx": 1,
+            "5xx": 3,
+            "total": 4
+        },
+        {
+            "ip": "145.51.146.223",
+            "4xx": 2,
+            "5xx": 2,
+            "total": 4
+        }
+    ],
+    "posibles_sqli": [
+        {
+            "ip": "193.32.162.55",
+            "url": "/login?user=admin'--&pass=x",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:30:16 +0000] \"GET /login?user=admin'--&pass=x HTTP/1.1\" 500 930 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/api/data?filter=1",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:32:56 +0000] \"GET /api/data?filter=1 OR 1=1 HTTP/1.1\" 500 4783 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/login?user=admin'--&pass=x",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:31:04 +0000] \"GET /login?user=admin'--&pass=x HTTP/1.1\" 500 957 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/products?cat=1;",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:30:24 +0000] \"GET /products?cat=1; SELECT * FROM users-- HTTP/1.1\" 500 4835 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/search?q='",
+            "status": 200,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:30:56 +0000] \"GET /search?q=' OR 1=1-- HTTP/1.1\" 200 2710 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/api/v1/users?id=1",
+            "status": 200,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:30:48 +0000] \"GET /api/v1/users?id=1 UNION SELECT username,password FROM users-- HTTP/1.1\" 200 2515 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/search?q='",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:30:08 +0000] \"GET /search?q=' OR 1=1-- HTTP/1.1\" 500 2977 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/item?id=1",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:30:40 +0000] \"GET /item?id=1 UNION SELECT null,table_name FROM information_schema.tables-- HTTP/1.1\" 500 703 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/products?cat=1;",
+            "status": 200,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:32:48 +0000] \"GET /products?cat=1; SELECT * FROM users-- HTTP/1.1\" 200 506 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/api/v1/users?id=1",
+            "status": 400,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:32:24 +0000] \"GET /api/v1/users?id=1 UNION SELECT username,password FROM users-- HTTP/1.1\" 400 3452 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/products?cat=1;",
+            "status": 200,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:31:12 +0000] \"GET /products?cat=1; SELECT * FROM users-- HTTP/1.1\" 200 2900 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/search?q='",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:31:44 +0000] \"GET /search?q=' OR 1=1-- HTTP/1.1\" 500 353 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/api/data?filter=1",
+            "status": 400,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:31:20 +0000] \"GET /api/data?filter=1 OR 1=1 HTTP/1.1\" 400 3175 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/products?cat=1;",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:32:00 +0000] \"GET /products?cat=1; SELECT * FROM users-- HTTP/1.1\" 500 1386 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/login?user=admin'--&pass=x",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:32:40 +0000] \"GET /login?user=admin'--&pass=x HTTP/1.1\" 500 2045 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/login?user=admin'--&pass=x",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:31:52 +0000] \"GET /login?user=admin'--&pass=x HTTP/1.1\" 500 1451 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/api/data?filter=1",
+            "status": 200,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:32:08 +0000] \"GET /api/data?filter=1 OR 1=1 HTTP/1.1\" 200 929 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/api/data?filter=1",
+            "status": 400,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:30:32 +0000] \"GET /api/data?filter=1 OR 1=1 HTTP/1.1\" 400 1432 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/item?id=1",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:32:16 +0000] \"GET /item?id=1 UNION SELECT null,table_name FROM information_schema.tables-- HTTP/1.1\" 500 1783 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/item?id=1",
+            "status": 400,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:31:28 +0000] \"GET /item?id=1 UNION SELECT null,table_name FROM information_schema.tables-- HTTP/1.1\" 400 714 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/search?q='",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:32:32 +0000] \"GET /search?q=' OR 1=1-- HTTP/1.1\" 500 2406 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/item?id=1",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:33:04 +0000] \"GET /item?id=1 UNION SELECT null,table_name FROM information_schema.tables-- HTTP/1.1\" 500 1358 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/api/v1/users?id=1",
+            "status": 200,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:31:36 +0000] \"GET /api/v1/users?id=1 UNION SELECT username,password FROM users-- HTTP/1.1\" 200 2868 \"-\" \"sqlmap/1.7\""
+        },
+        {
+            "ip": "193.32.162.55",
+            "url": "/api/v1/users?id=1",
+            "status": 500,
+            "raw": "193.32.162.55 - - [14/Jun/2024:05:30:00 +0000] \"GET /api/v1/users?id=1 UNION SELECT username,password FROM users-- HTTP/1.1\" 500 4139 \"-\" \"sqlmap/1.7\""
+        }
+    ]
+}
