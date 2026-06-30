@@ -1,0 +1,9 @@
+{
+  "herramienta": "Kibana",
+  "fuente_datos": {
+    "tipo": "Index Pattern",
+    "nombre": "wazuh-alerts-*",
+    "indice_elasticsearch": "wazuh-alerts-*",
+    "timestamp_field": "@timestamp"
+  }
+}

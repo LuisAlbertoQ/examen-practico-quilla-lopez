@@ -1,0 +1,3 @@
+Herramienta: Kibana
+Version: 8.x (incluido con Wazuh All-in-One 4.9)
+URL: https://<IP_VM1>:5601
