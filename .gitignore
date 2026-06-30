@@ -4,4 +4,7 @@ __pycache__/
 .venv
 venv/
 *.pkl
+!lab3/modelo_anomalias.pkl
+!lab3/scaler.pkl
+!lab3/feature_cols.pkl
 .ipynb_checkpoints/

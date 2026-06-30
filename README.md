@@ -105,7 +105,7 @@ pip3 list | grep -E "pandas|matplotlib|seaborn|scikit-learn|joblib|notebook"
 |-------------|--------|
 | Lab 1 - Análisis Forense de Logs con Python | ✅ Completado |
 | Lab 2 - Reglas de Correlación en Wazuh | ✅ Completado |
-| Lab 3 - Modelo ML de Detección de Anomalías | ⏳ Pendiente |
+| Lab 3 - Modelo ML de Detección de Anomalías | ✅ Completado |
 | Lab 4 - Dashboard de Monitoreo | ⏳ Pendiente |
 
 ---
@@ -193,7 +193,7 @@ sudo grep "100001" /var/ossec/logs/alerts/alerts.log
 
 ---
 
-### Laboratorio 3: Modelo ML de Detección de Anomalías (6 pts)
+### Laboratorio 3: Modelo ML de Detección de Anomalías (6 pts) ✅
 
 **Ubicación:** VM2 (python-vm) - `lab3/`
 
@@ -201,6 +201,8 @@ sudo grep "100001" /var/ossec/logs/alerts/alerts.log
 - `deteccion_anomalias.ipynb` - Jupyter Notebook con EDA, entrenamiento Isolation Forest, métricas
 - `predecir.py` - Script que carga el modelo y clasifica tráfico nuevo
 - `modelo_anomalias.pkl` - Modelo serializado con joblib
+- `scaler.pkl` - Scaler para normalización
+- `feature_cols.pkl` - Lista de features utilizadas
 
 **Ejecución:**
 ```bash
@@ -211,11 +213,24 @@ jupyter notebook lab3/deteccion_anomalias.ipynb
 python3 lab3/predecir.py lab3/network_traffic.csv
 ```
 
-**Evidencias requeridas:**
-- SCR-3.1_eda.png - Notebook con EDA e histogramas
-- SCR-3.2_metricas.png - Precision, Recall, F1-Score y matriz de confusión
-- SCR-3.3_umbral_f1.png - Curva umbral vs F1 y Top 10 anomalías
-- SCR-3.4_predecir.png - Ejecución de predecir.py
+**Métricas obtenidas:**
+- Precision: 0.5940
+- Recall: 0.5940
+- F1-Score: 0.5940
+
+#### Evidencias
+
+**SCR-3.1** - Notebook con EDA e histogramas:
+![SCR-3.1](lab3/evidencias/SCR-3.1_eda.png)
+
+**SCR-3.2** - Métricas y matriz de confusión:
+![SCR-3.2](lab3/evidencias/SCR-3.2_metricas.png)
+
+**SCR-3.3** - Curva umbral vs F1 y Top 10 anomalías:
+![SCR-3.3](lab3/evidencias/SCR-3.3_umbral_f1.png)
+
+**SCR-3.4** - Ejecución de `predecir.py`:
+![SCR-3.4](lab3/evidencias/SCR-3.4_predecir.png)
 
 ---
 
@@ -313,10 +328,10 @@ examen-practico-quilla-lopez/
 | SCR-2.1 | ✅ `lab2/evidencias/SCR-2.1_wazuh_activo.png` | `systemctl status wazuh-manager` en estado active |
 | SCR-2.2 | ✅ `lab2/evidencias/SCR-2.2_reglas_validadas.png` | Validación XML sin errores |
 | SCR-2.3 | ✅ `lab2/evidencias/SCR-2.3_alerta_disparada.png` | Alerta de brute-force en alerts.log |
-| SCR-3.1 | `lab3/evidencias/SCR-3.1_eda.png` | Notebook con EDA e histogramas |
-| SCR-3.2 | `lab3/evidencias/SCR-3.2_metricas.png` | Métricas y matriz de confusión |
-| SCR-3.3 | `lab3/evidencias/SCR-3.3_umbral_f1.png` | Curva umbral vs F1 y Top 10 anomalías |
-| SCR-3.4 | `lab3/evidencias/SCR-3.4_predecir.png` | Ejecución de `predecir.py` |
+| SCR-3.1 | ✅ `lab3/evidencias/SCR-3.1_eda.png` | Notebook con EDA e histogramas |
+| SCR-3.2 | ✅ `lab3/evidencias/SCR-3.2_metricas.png` | Métricas y matriz de confusión |
+| SCR-3.3 | ✅ `lab3/evidencias/SCR-3.3_umbral_f1.png` | Curva umbral vs F1 y Top 10 anomalías |
+| SCR-3.4 | ✅ `lab3/evidencias/SCR-3.4_predecir.png` | Ejecución de `predecir.py` |
 | SCR-4.1 | `lab4/evidencias/SCR-4.1_fuente_datos.png` | Fuente de datos conectada en Kibana |
 | SCR-4.2 | `lab4/evidencias/SCR-4.2_visualizaciones.png` | Las 4 visualizaciones |
 | SCR-4.3 | `lab4/evidencias/SCR-4.3_dashboard.png` | Dashboard "SOC - Monitor de Seguridad" |
