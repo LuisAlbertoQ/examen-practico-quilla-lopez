@@ -99,9 +99,20 @@ pip3 list | grep -E "pandas|matplotlib|seaborn|scikit-learn|joblib|notebook"
 
 ---
 
+## Estado del Proyecto
+
+| Laboratorio | Estado |
+|-------------|--------|
+| Lab 1 - Análisis Forense de Logs con Python | ✅ Completado |
+| Lab 2 - Reglas de Correlación en Wazuh | ⏳ Pendiente |
+| Lab 3 - Modelo ML de Detección de Anomalías | ⏳ Pendiente |
+| Lab 4 - Dashboard de Monitoreo | ⏳ Pendiente |
+
+---
+
 ## Laboratorios
 
-### Laboratorio 1: Análisis Forense de Logs con Python (5 pts)
+### Laboratorio 1: Análisis Forense de Logs con Python (5 pts) ✅
 
 **Ubicación:** VM2 (python-vm) - `lab1/`
 
@@ -118,12 +129,30 @@ python3 lab1/analizar_web.py
 python3 lab1/visualizar.py
 ```
 
-**Evidencias requeridas:**
-- SCR-1.1a_ssh_ejecucion.png - Terminal con alertas de fuerza bruta
-- SCR-1.1b_ssh_json.png - Contenido de reporte_ssh.json
-- SCR-1.2a_web_ejecucion.png - Detecciones de escaneo y SQLi
-- SCR-1.2b_web_json.png - Contenido de reporte_web.json
-- top10_ssh.png, timeline_http.png, heatmap_http.png (gráficas generadas)
+#### Evidencias
+
+**SCR-1.1a** - Ejecución de `analizar_ssh.py` con alertas de fuerza bruta:
+![SCR-1.1a](lab1/evidencias/SCR-1.1a_ssh_ejecucion.png)
+
+**SCR-1.1b** - Contenido de `reporte_ssh.json`:
+![SCR-1.1b](lab1/evidencias/SCR-1.1b_ssh_json.png)
+
+**SCR-1.2a** - Ejecución de `analizar_web.py` con detecciones de escaneo y SQLi:
+![SCR-1.2a](lab1/evidencias/SCR-1.2a_web_ejecucion.png)
+
+**SCR-1.2b** - Contenido de `reporte_web.json`:
+![SCR-1.2b](lab1/evidencias/SCR-1.2b_web_json.png)
+
+#### Gráficas Generadas
+
+**Top 10 IPs con más intentos fallidos SSH:**
+![top10_ssh](lab1/graficas/top10_ssh.png)
+
+**Línea de tiempo - Peticiones HTTP por hora:**
+![timeline_http](lab1/graficas/timeline_http.png)
+
+**Mapa de calor - Peticiones HTTP por hora y código de respuesta:**
+![heatmap_http](lab1/graficas/heatmap_http.png)
 
 ---
 
@@ -271,10 +300,10 @@ examen-practico-quilla-lopez/
 
 | Código | Archivo | Qué debe mostrar |
 |--------|---------|------------------|
-| SCR-1.1a | `lab1/evidencias/SCR-1.1a_ssh_ejecucion.png` | Terminal con `python3 analizar_ssh.py` y líneas `[ALERTA]` visibles |
-| SCR-1.1b | `lab1/evidencias/SCR-1.1b_ssh_json.png` | Contenido de `reporte_ssh.json` (cat o editor) |
-| SCR-1.2a | `lab1/evidencias/SCR-1.2a_web_ejecucion.png` | Terminal con detecciones de escaneo y SQLi |
-| SCR-1.2b | `lab1/evidencias/SCR-1.2b_web_json.png` | Contenido de `reporte_web.json` |
+| SCR-1.1a | ✅ `lab1/evidencias/SCR-1.1a_ssh_ejecucion.png` | Terminal con `python3 analizar_ssh.py` y líneas `[ALERTA]` visibles |
+| SCR-1.1b | ✅ `lab1/evidencias/SCR-1.1b_ssh_json.png` | Contenido de `reporte_ssh.json` (cat o editor) |
+| SCR-1.2a | ✅ `lab1/evidencias/SCR-1.2a_web_ejecucion.png` | Terminal con detecciones de escaneo y SQLi |
+| SCR-1.2b | ✅ `lab1/evidencias/SCR-1.2b_web_json.png` | Contenido de `reporte_web.json` |
 | SCR-2.1 | `lab2/evidencias/SCR-2.1_wazuh_activo.png` | `systemctl status wazuh-manager` en estado active |
 | SCR-2.2 | `lab2/evidencias/SCR-2.2_reglas_validadas.png` | Validación XML sin errores |
 | SCR-2.3 | `lab2/evidencias/SCR-2.3_alerta_disparada.png` | Alerta de brute-force en alerts.log |
