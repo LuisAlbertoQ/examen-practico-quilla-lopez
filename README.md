@@ -26,19 +26,19 @@ Se utiliza una arquitectura de **2 máquinas virtuales en VirtualBox** con Ubunt
 ┌─────────────────┐     ┌─────────────────────────┐
 │   VM1: wazuh-vm  │     │   VM2: python-vm         │
 │   Ubuntu 22.04   │     │   Ubuntu 22.04           │
-│   4 GB RAM       │     │   4 GB RAM               │
-│   2 vCPU         │     │   2 vCPU                 │
-│   25 GB disco    │     │   25 GB disco            │
-│   Red: NAT       │     │   Red: NAT               │
+│   6 GB RAM       │     │   4 GB RAM               │
+│   3 vCPU         │     │   2 vCPU                 │
+│   80 GB disco    │     │   30 GB disco            │
+│   Red: NAT+Host  │     │   Red: NAT               │
 │                   │     │                          │
 │ LABORATORIO 2    │     │ LABORATORIO 1            │
-│  - Wazuh Manager  │     │  - Python 3.11+          │
+│  - Wazuh Manager  │     │  - Python 3.10           │
 │  - Reglas de      │     │  - analizar_ssh.py       │
 │    correlación    │     │  - analizar_web.py       │
 │                   │     │  - visualizar.py         │
 │ LABORATORIO 4    │     │                          │
-│  - Elasticsearch  │     │ LABORATORIO 3            │
-│  - Kibana         │     │  - Jupyter Notebook      │
+│  - Wazuh Indexer  │     │ LABORATORIO 3            │
+│  - Wazuh Dashboard│     │  - Jupyter Notebook      │
 │  - Dashboard SOC  │     │  - Isolation Forest      │
 │  - Alertas        │     │  - predecir.py           │
 └─────────────────┘     └─────────────────────────┘
@@ -63,19 +63,19 @@ Se utiliza una arquitectura de **2 máquinas virtuales en VirtualBox** con Ubunt
 sudo apt update && sudo apt upgrade -y
 
 # Instalar dependencias
-sudo apt install -y curl wget git unzip apt-transport-https software-properties-common
+sudo apt install -y curl wget git unzip apt-transport-https software-properties-common dos2unix
 
-# Instalar Wazuh All-in-One (incluye Elasticsearch + Kibana)
+# Instalar Wazuh All-in-One (Wazuh Manager + Wazuh Indexer + Wazuh Dashboard)
 curl -sO https://packages.wazuh.com/4.9/wazuh-install.sh
 sudo bash wazuh-install.sh -a
 
 # Verificar estado
 sudo systemctl status wazuh-manager
-sudo systemctl status elasticsearch
-sudo systemctl status kibana
+sudo systemctl status wazuh-indexer
+sudo systemctl status wazuh-dashboard
 
-# Acceder a Kibana: https://<IP_VM1>:5601
-# Credenciales generadas durante la instalación
+# Acceder a Wazuh Dashboard: https://<IP_HOST_ONLY>:443
+# Credenciales generadas al final de la instalacion
 ```
 
 ### VM2 - python-vm (Lab 1 + Lab 3)
@@ -106,7 +106,7 @@ pip3 list | grep -E "pandas|matplotlib|seaborn|scikit-learn|joblib|notebook"
 | Lab 1 - Análisis Forense de Logs con Python | ✅ Completado |
 | Lab 2 - Reglas de Correlación en Wazuh | ✅ Completado |
 | Lab 3 - Modelo ML de Detección de Anomalías | ✅ Completado |
-| Lab 4 - Dashboard de Monitoreo | ⏳ Pendiente |
+| Lab 4 - Dashboard de Monitoreo | ✅ Completado |
 
 ---
 
@@ -234,28 +234,50 @@ python3 lab3/predecir.py lab3/network_traffic.csv
 
 ---
 
-### Laboratorio 4: Dashboard de Monitoreo (5 pts)
+### Laboratorio 4: Dashboard de Monitoreo (5 pts) ✅
 
 **Ubicación:** VM1 (wazuh-vm) - `lab4/`
 
-**Herramienta elegida:** Kibana (incluido con Wazuh All-in-One / Elastic Stack 8.x)
+**Herramienta elegida:** Wazuh Dashboard (incluido con Wazuh All-in-One / OpenSearch 2.13.0)
 
 **Configuración:**
-1. Acceder a Kibana: `https://<IP_VM1>:5601`
+1. Acceder a Wazuh Dashboard: `https://192.168.57.4:443`
 2. Crear Index Pattern: `wazuh-alerts-*`
 3. Crear visualizaciones:
-   - V1: Vertical Bar - Count de alertas por nivel de severidad
-   - V2: Data Table - Top 10 IPs con más alertas
-   - V3: Line - Alertas por hora (últimas 24h)
-   - V4: Pie Chart - Distribución por tipo de regla
-4. Crear Dashboard "SOC - Monitor de Seguridad"
-5. Configurar alerta de umbral (nivel ≥10, >5 eventos en 5 min)
+   - V1: Vertical Bar - Count de alertas por nivel de severidad (`rule.level`)
+   - V2: Data Table - Top 10 IPs con más alertas (`data.srcip`)
+   - V3: Line - Alertas por hora (últimas 24h, intervalo 1h)
+   - V4: Pie Chart - Distribución por tipo de regla (`rule.groups`)
+4. Crear Dashboard "SOC - Monitor de Seguridad" con las 4 visualizaciones
+5. Configurar alerta de umbral vía API (nivel ≥10, >5 eventos en 5 min)
 
-**Evidencias requeridas:**
-- SCR-4.1_fuente_datos.png - Fuente de datos conectada
-- SCR-4.2_visualizaciones.png - Las 4 visualizaciones
-- SCR-4.3_dashboard.png - Dashboard "SOC - Monitor de Seguridad"
-- SCR-4.4_alerta.png - Regla de alerta configurada
+**Alerta creada via Dev Tools:**
+```json
+POST _plugins/_alerting/monitors
+{
+  "name": "Alerta de Umbral - SOC",
+  "type": "monitor",
+  "monitor_type": "query_level_monitor",
+  "enabled": true,
+  "schedule": {"period": {"interval": 5, "unit": "MINUTES"}},
+  "inputs": [{"search": {"indices": ["wazuh-alerts-*"], "query": {"query": {"bool": {"filter": [{"range": {"rule.level": {"gte": 10}}}]}}}}}],
+  "triggers": [{"name": "Umbral superado", "severity": "1", "condition": {"script": {"source": "ctx.results[0].hits.total.value > 5"}}, "actions": [{"name": "soc-notificaciones", "destination_id": ""}}]}]
+}
+```
+
+#### Evidencias
+
+**SCR-4.1** - Fuente de datos conectada (Index Pattern `wazuh-alerts-*`):
+![SCR-4.1](lab4/evidencias/SCR-4.1_fuente_datos.png)
+
+**SCR-4.2** - Las 4 visualizaciones creadas:
+![SCR-4.2](lab4/evidencias/SCR-4.2_visualizaciones.png)
+
+**SCR-4.3** - Dashboard "SOC - Monitor de Seguridad":
+![SCR-4.3](lab4/evidencias/SCR-4.3_dashboard.png)
+
+**SCR-4.4** - Alerta de umbral configurada vía API:
+![SCR-4.4](lab4/evidencias/SCR-4.4_alerta.png)
 
 ---
 
@@ -309,10 +331,12 @@ examen-practico-quilla-lopez/
     ├── datasource_config.json     ← Config fuente de datos
     └── evidencias/
         ├── herramienta_usada.txt  ← Nombre, versión, URL del servicio
+        ├── alerts_20.csv          ← 20 registros exportados vía API
         ├── SCR-4.1_fuente_datos.png
         ├── SCR-4.2_visualizaciones.png
         ├── SCR-4.3_dashboard.png
-        └── SCR-4.4_alerta.png
+        ├── SCR-4.4_alerta.png
+        └── SCR-4.4_alerta2.png
 ```
 
 ---
@@ -332,10 +356,10 @@ examen-practico-quilla-lopez/
 | SCR-3.2 | ✅ `lab3/evidencias/SCR-3.2_metricas.png` | Métricas y matriz de confusión |
 | SCR-3.3 | ✅ `lab3/evidencias/SCR-3.3_umbral_f1.png` | Curva umbral vs F1 y Top 10 anomalías |
 | SCR-3.4 | ✅ `lab3/evidencias/SCR-3.4_predecir.png` | Ejecución de `predecir.py` |
-| SCR-4.1 | `lab4/evidencias/SCR-4.1_fuente_datos.png` | Fuente de datos conectada en Kibana |
-| SCR-4.2 | `lab4/evidencias/SCR-4.2_visualizaciones.png` | Las 4 visualizaciones |
-| SCR-4.3 | `lab4/evidencias/SCR-4.3_dashboard.png` | Dashboard "SOC - Monitor de Seguridad" |
-| SCR-4.4 | `lab4/evidencias/SCR-4.4_alerta.png` | Regla de alerta configurada |
+| SCR-4.1 | ✅ `lab4/evidencias/SCR-4.1_fuente_datos.png` | Fuente de datos conectada en Wazuh Dashboard |
+| SCR-4.2 | ✅ `lab4/evidencias/SCR-4.2_visualizaciones.png` | Las 4 visualizaciones |
+| SCR-4.3 | ✅ `lab4/evidencias/SCR-4.3_dashboard.png` | Dashboard "SOC - Monitor de Seguridad" |
+| SCR-4.4 | ✅ `lab4/evidencias/SCR-4.4_alerta.png` | Regla de alerta configurada vía API |
 
 Todos los screenshots deben mostrar fecha/hora del sistema y el nombre del estudiante visible en la barra de título o prompt.
 
@@ -347,9 +371,10 @@ Todos los screenshots deben mostrar fecha/hora del sistema y el nombre del estud
 |-------------|---------|-------------|
 | Ubuntu | 22.04 LTS | VM VirtualBox |
 | Python | 3.11+ | `apt install python3` |
-| Wazuh | 4.9 | `wazuh-install.sh -a` |
-| Elasticsearch | 8.x | Incluido con Wazuh |
-| Kibana | 8.x | Incluido con Wazuh |
+| Wazuh Manager | 4.9.2 | `wazuh-install.sh -a` |
+| Wazuh Indexer | 1.13.0 | Incluido con Wazuh |
+| Wazuh Dashboard | 2.13.0 | Incluido con Wazuh |
+| OpenSearch | 2.13.0 | Incluido con Wazuh Indexer |
 | Jupyter Notebook | Última | `pip3 install notebook` |
 | pandas | Última | `pip3 install pandas` |
 | matplotlib | Última | `pip3 install matplotlib` |

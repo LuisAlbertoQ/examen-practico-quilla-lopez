@@ -1,0 +1,21 @@
+timestamp,rule_id,rule_level,srcip,description
+2026-06-30T22:53:32.955Z,510,7,,Host-based anomaly detection event (rootcheck).
+2026-06-30T22:53:47.627Z,5501,3,,PAM: Login session opened.
+2026-06-30T21:45:35.923Z,100020,6,,Transferencia saliente masiva detectada desde 
+2026-06-30T21:45:42.732Z,502,3,,Wazuh server started.
+2026-06-30T21:46:32.160Z,5501,3,,PAM: Login session opened.
+2026-06-30T21:46:32.160Z,5502,3,,PAM: Login session closed.
+2026-06-30T21:46:36.186Z,5402,3,,Successful sudo to ROOT executed.
+2026-06-30T21:46:36.186Z,5502,3,,PAM: Login session closed.
+2026-06-30T21:47:44.336Z,5502,3,,PAM: Login session closed.
+2026-06-30T21:48:09.013Z,5402,3,,Successful sudo to ROOT executed.
+2026-06-30T21:48:09.013Z,5402,3,,Successful sudo to ROOT executed.
+2026-06-30T21:48:29.467Z,5501,3,,PAM: Login session opened.
+2026-06-30T21:48:31.469Z,5502,3,,PAM: Login session closed.
+2026-06-30T21:48:35.475Z,5402,3,,Successful sudo to ROOT executed.
+2026-06-30T21:48:35.475Z,5402,3,,Successful sudo to ROOT executed.
+2026-06-30T21:48:35.475Z,5501,3,,PAM: Login session opened.
+2026-06-30T21:48:35.475Z,5760,5,45.33.32.156,sshd: authentication failed.
+2026-06-30T21:48:37.478Z,5760,5,45.33.32.156,sshd: authentication failed.
+2026-06-30T21:48:37.478Z,5760,5,45.33.32.156,sshd: authentication failed.
+2026-06-30T21:48:37.478Z,5760,5,45.33.32.156,sshd: authentication failed.
